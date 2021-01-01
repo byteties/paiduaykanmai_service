@@ -4,17 +4,17 @@ import categoryController from '../controller/category'
 import snackController from '../controller/snack'
 const route = express()
 
-route.post('/shops',shopController.add)
+route.post('/shop',shopController.add)
 route.put('/shop/:id',shopController.update)
 route.get('/shop/:id',shopController.get)
 route.get('/shops',shopController.getAll)
 
-route.post('/categorys',categoryController.add)
+route.post('/category',categoryController.add)
 route.put('/category/:id',categoryController.update)
 route.get('/category/:id',categoryController.get)
 route.get('/categorys',categoryController.getAll)
 
-route.post('/snacks',snackController.add)
+route.post('/snack',snackController.add)
 route.put('/snack/:id',snackController.update)
 route.get('/snack/:id',snackController.get)
 route.get('/snacks',snackController.getAll)

@@ -23,7 +23,15 @@ const get = async (req,res) => {
 }
 
 const getAll = async(req,res) =>{
-  const snackResult = await snackModel.find({})
+  const { shopID,categoryID } = req.query
+  let snackResult
+  if(shopID){
+    snackResult = await snackModel.find({shopID:shopID})
+  } else if(categoryID){
+    snackResult = await snackModel.find({categoryID:Number(categoryID)})
+  }else {
+    snackResult = await snackModel.find({})
+  }
   return res.send(snackResult)
 }
 
