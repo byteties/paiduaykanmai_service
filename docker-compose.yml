@@ -1,13 +1,15 @@
 version: '3'
 services:
-    node:
-        image: registry.thinknet.co.th/sredev/node:10.15
-        command: ["/bin/sh", "-c", "yarn && yarn dev"]
-        ports:
-            - "8080:8080"
-        volumes:
-            - .:/usr/src/app
-networks:
-    default:
-        external:
-            name: microservicenetwork
+  app:
+    container_name: docker-node-mongo
+    restart: always
+    build: .
+    ports:
+      - '8080:8080' 
+    links: 
+      - mongo
+  mongo: 
+    container_name: mongo
+    image: mongo
+    ports: 
+    - '27017:27017'

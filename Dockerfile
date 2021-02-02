@@ -1,3 +1,7 @@
-FROM registry.thinknet.co.th/sredev/node:10.15
-COPY . /usr/src/app/
-RUN yarn install --production=true --no-cache && yarn build
+FROM node:10
+WORKDIR /usr/src/app
+COPY package*.json ./
+RUN npm install
+COPY . .
+EXPOSE 8080
+CMD ["npm", "start"]
