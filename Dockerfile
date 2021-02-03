@@ -1,7 +1,17 @@
-FROM node:10
-WORKDIR /usr/src/app
-COPY package*.json ./
-RUN npm install
-COPY . .
+FROM node:14-alpine as base
+
+WORKDIR /src
+COPY package*.json /
 EXPOSE 8080
-CMD ["npm", "start"]
+
+FROM base as production
+ENV NODE_ENV=production
+RUN npm ci
+COPY . /
+CMD ["node", "bin/www"]
+
+FROM base as dev
+ENV NODE_ENV=development
+RUN npm install -g nodemon && npm install
+COPY . /
+CMD ["nodemon", "bin/www"]

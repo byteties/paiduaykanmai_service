@@ -1,15 +1,14 @@
-version: '3'
+version: '3.8'
 services:
-  app:
-    container_name: docker-node-mongo
-    restart: always
-    build: .
+  web:
+    build:
+      context: ./
+      target: dev
+    volumes:
+      - .:/src
+    command: npm run start:dev
     ports:
-      - '8080:8080' 
-    links: 
-      - mongo
-  mongo: 
-    container_name: mongo
-    image: mongo
-    ports: 
-    - '27017:27017'
+      - "8080:8080"
+    environment:
+      NODE_ENV: development
+      DEBUG: nodejs-docker-express:*
